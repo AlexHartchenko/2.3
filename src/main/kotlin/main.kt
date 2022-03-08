@@ -1,9 +1,11 @@
 package ru.netology
 
 fun main() {
-    val amount = 100_000
+    val amount = 10001
     val loyaltyClient = true
-    val amountAfterDiscount = amount - calculateInitialDiscount(amount) - calculateLoyalDiscount(amount, loyaltyClient)
+    val initialDiscount = calculateInitialDiscount(amount)
+    val loyalDiscount = calculateLoyalDiscount(amount, loyaltyClient)
+    val amountAfterDiscount = amount - initialDiscount - loyalDiscount
     println("Сумма : $amountAfterDiscount руб.")
 }
 
@@ -16,10 +18,9 @@ fun calculateInitialDiscount(amount: Int): Int {
 }
 
 fun calculateLoyalDiscount(amount: Int, loyaltyClient: Boolean): Int {
-    val discountLoyal: Int = if (loyaltyClient) {
+    return if (loyaltyClient) {
         ((amount - calculateInitialDiscount(amount)) * 0.01).toInt()
     } else {
         0
     }
-    return discountLoyal
 }
